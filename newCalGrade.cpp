@@ -5,12 +5,22 @@
 // 6406021410055 นายอนุวิท ศรีชัยทัศน์
 #include <iomanip>
 #include <iostream>
+#include <locale>
 #include <string.h>
+#include <string>
 
 using namespace std;
-void input();
-void printGrade();
-void desicion();
+template<class T>
+T input();
+template<class T>
+T printGrade();
+template<class T>
+T printGrade2();
+template<class T>
+T printGrade3();
+template<class T>
+T desicion();
+
 int count = 1;
 const float WIDTH = 9.5;
 int stdnum[15];
@@ -22,30 +32,42 @@ int midterm[15];
 int final[15];
 int sum[15];
 int test[15];
-char grade[15];
+string grade[15];
 int i;
 char choice;
 int main() {
   cout << "========================================\n";
   cout << "Choice 1.(Input Score)" << endl;
   cout << "Choice 2.(Calc Grade)" << endl;
-  cout << "Choice 3.(Print Grade)" << endl;
-  cout << "Choice 4.(Exit program) " << endl;
+  cout << "Choice 3.(Print Grade // A,B+,B,C+,C,D+,D,F)" << endl;
+  cout << "Choice 4.(Print Grade // 4,3.5,3,2.5,2,1.5,1,0)" << endl;
+  cout << "Choice 5.(Print Grade // PASS & FAIL)" << endl;
+  cout << "Choice 6.(Exit program) " << endl;
   cout << "========================================\n";
   cout << "Please enter number choice (1,2,3,4) : ";
   cin >> choice;
   if (choice == '1') {
-    input();
-  } else if (choice == '2') {
-    desicion();
-  } else if (choice == '3') {
-    printGrade();
-  } else if (choice == '4') {
+    input<void>();
+  } 
+  else if (choice == '2') {
+    desicion<void>();
+  } 
+  else if (choice == '3') {
+    printGrade<void>();
+  }
+  else if (choice == '4') {
+    printGrade2<void>();
+  }
+  else if (choice == '5') {
+    printGrade3<void>();
+  } 
+  else if (choice == '6') {
     exit(0);
   }
 }
 
-void input() {
+template<class T>
+T input() {
   int count = 1;
   char qt_menu;
   for (int i = 0; i <= 2; i++) {
@@ -94,21 +116,35 @@ void input() {
   }
 }
 
-void desicion() {
+template<class T>
+T desicion() {
   int count;
   char qt_menu;
   for (int i = 0; i <= 2; i++) {
     sum[i] = room[i] + homework[i] + test[i] + midterm[i] + final[i];
     if (sum[i] >= 80) {
-      grade[i] = 'A';
-    } else if (sum[i] >= 70) {
-      grade[i] = 'B';
-    } else if (sum[i] >= 60) {
-      grade[i] = 'C';
-    } else if (sum[i] >= 50) {
-      grade[i] = 'D';
-    } else
-      grade[i] = 'F';
+      grade[i] = "A";
+    } 
+    else if (sum[i] >= 75) {
+      grade[i] = "B+";
+    } 
+    else if (sum[i] >= 70) {
+      grade[i] = "B";
+    } 
+    else if (sum[i] >= 65) {
+      grade[i] = "D+";    
+    }
+    else if (sum[i] >= 60) {
+      grade[i] = "D";    
+    } 
+    else if (sum[i] >= 55) {
+      grade[i] = "C+";    
+    }
+    else if (sum[i] >= 50) {
+      grade[i] = "C";    
+    }    
+    else {
+      grade[i] = "F";
   }
   cout << "Success to Process Desition!\n";
   cout << "You can exit to menu pls 'q' : ";
@@ -117,10 +153,94 @@ void desicion() {
     main();
   }
 }
+}
 
 // int printGrade(int std_name[],int std_surname[]){
 
-void printGrade() {
+template<class T>
+T printGrade() {
+  int count;
+  char qt_menu;
+  cout << "|=============================================================|\n";
+  cout << "\t|No.|\t|     Name-Surname     | |point| |Grade|\t\n";
+  cout << "|=============================================================|\n";
+
+  // loop ปริ้นตาราง
+  count = 1;
+  cout << setfill(' ');
+  for (int i = 0; i <= 2; i++) {
+    cout << "| " << setw(WIDTH) << count++;
+    cout << " :" << setw(WIDTH + 2) << std_name[i];
+    cout << "  " << setw(WIDTH) << std_surname[i];
+    cout << "  " << setw(WIDTH) << sum[i];
+    cout << "  " << setw(WIDTH - 4) << grade[i];
+    cout << setw(WIDTH + 1) << " |";
+    cout << "  " << endl;
+    cout << "|=============================================================|\n";
+  }
+  cout << "Success to Process printGrade!\n";
+  cout << "You can exit to menu pls 'q' : ";
+  cin >> qt_menu;
+  if (qt_menu == 'q') {
+    main();
+  }
+}
+
+template<class T>
+T printGrade2() {
+  int count;
+  char qt_menu;
+  cout << "|=============================================================|\n";
+  cout << "\t|No.|\t|     Name-Surname     | |point| |Grade|\t\n";
+  cout << "|=============================================================|\n";
+
+  // loop ปริ้นตาราง
+  count = 1;
+  cout << setfill(' ');
+  for (int i = 0; i <= 2; i++) {
+      if ( grade[i] == "A") {
+          grade[i] = 4;
+      }
+      else if ( grade[i] == "B+") {
+          grade[i] = double(3.5);
+      }
+      else if ( grade[i] == "B") {
+          grade[i] = 3;
+      }
+      else if ( grade[i] == "C+") {
+          grade[i] = double(2.5);
+      }
+      else if ( grade[i] == "C") {
+          grade[i] = 2;
+      }
+      else if ( grade[i] == "D+") {
+          grade[i] = double(1.5);
+      }
+      else if ( grade[i] == "D") {
+          grade[i] = 1;
+      }
+      else if ( grade[i] == "F") {
+          grade[i] = "null";
+      }
+    cout << "| " << setw(WIDTH) << count++;
+    cout << " :" << setw(WIDTH + 2) << std_name[i];
+    cout << "  " << setw(WIDTH) << std_surname[i];
+    cout << "  " << setw(WIDTH) << sum[i];
+    cout << "  " << setw(WIDTH - 4) << grade[i];
+    cout << setw(WIDTH + 1) << " |";
+    cout << "  " << endl;
+    cout << "|=============================================================|\n";
+  }
+  cout << "Success to Process printGrade!\n";
+  cout << "You can exit to menu pls 'q' : ";
+  cin >> qt_menu;
+  if (qt_menu == 'q') {
+    main();
+  }
+}
+
+template<class T>
+T printGrade3() {
   int count;
   char qt_menu;
   cout << "|=============================================================|\n";
