@@ -21,6 +21,7 @@ T printGrade3();
 template<class T>
 T desicion();
 
+int loop = 2;
 int count = 1;
 const float WIDTH = 9.5;
 int stdnum[15];
@@ -32,6 +33,8 @@ int midterm[15];
 int final[15];
 int sum[15];
 int test[15];
+string GPA[15];
+string pass[15];
 string grade[15];
 //int i;
 char choice;
@@ -71,7 +74,7 @@ T input() {
   //int count = 1;
   int count = 1;
   char qt_menu;
-  for (int i = 0; i <= 2; i++) {
+  for (int i = 0; i <= loop; i++) {
     cout << "[" << count << "] "
          << "Enter student name and surname : ";
     cin >> std_name[i] >> std_surname[i];
@@ -121,7 +124,7 @@ template<class T>
 T desicion() {
   //int count;
   char qt_menu;
-  for (int i = 0; i <= 2; i++) {
+  for (int i = 0; i <= loop; i++) {
     //sum[i] = room[i] + homework[i] + test[i] + midterm[i] + final[i];
     if (sum[i] >= 80) {
       grade[i] = "A";
@@ -169,7 +172,7 @@ T printGrade() {
   // loop ปริ้นตาราง
   count = 1;
   cout << setfill(' ');
-  for (int i = 0; i <= 2; i++) {
+  for (int i = 0; i <= loop; i++) {
     cout << "| " << setw(WIDTH) << count++;
     cout << " :" << setw(WIDTH + 2) << std_name[i];
     cout << "  " << setw(WIDTH) << std_surname[i];
@@ -198,36 +201,36 @@ T printGrade2() {
   // loop ปริ้นตาราง
   count = 1;
   cout << setfill(' ');
-  for (int i = 0; i <= 2; i++) {
+  for (int i = 0; i <= loop; i++) {
       if ( grade[i] == "A") {
-          grade[i] = "4";
+          GPA[i] = "4";
       }
       else if ( grade[i] == "B+") {
-          grade[i] = "3.5";
+          GPA[i] = "3.5";
       }
       else if ( grade[i] == "B") {
-          grade[i] = "3";
+          GPA[i] = "3";
       }
       else if ( grade[i] == "C+") {
-          grade[i] = "2.5";
+          GPA[i] = "2.5";
       }
       else if ( grade[i] == "C") {
-          grade[i] = "2";
+          GPA[i] = "2";
       }
       else if ( grade[i] == "D+") {
-          grade[i] = "1.5";
+          GPA[i] = "1.5";
       }
       else if ( grade[i] == "D") {
-          grade[i] = "1";
+          GPA[i] = "1";
       }
       else if ( grade[i] == "F") {
-          grade[i] = "0";
+          GPA[i] = "0";
       }
     cout << "| " << setw(WIDTH) << count++;
     cout << " :" << setw(WIDTH + 2) << std_name[i];
     cout << "  " << setw(WIDTH) << std_surname[i];
     cout << "  " << setw(WIDTH) << sum[i];
-    cout << "  " << setw(WIDTH - 4) << grade[i];
+    cout << "  " << setw(WIDTH - 4) << GPA[i];
     cout << setw(WIDTH + 1) << " |";
     cout << "  " << endl;
     cout << "|=============================================================|\n";
@@ -251,18 +254,18 @@ T printGrade3() {
   // loop ปริ้นตาราง
   count = 1;
   cout << setfill(' ');
-  for (int i = 0; i <= 2; i++) {
+  for (int i = 0; i <= loop; i++){
     if (sum[i] >= 50) {
-          grade[i] = "PASS";
+          pass[i] = "PASS";
     }
     else {
-      grade[i] = "FAIL";
+      pass[i] = "FAIL";
     }
     cout << "| " << setw(WIDTH) << count++;
     cout << " :" << setw(WIDTH + 2) << std_name[i];
     cout << "  " << setw(WIDTH) << std_surname[i];
     cout << "  " << setw(WIDTH) << sum[i];
-    cout << "  " << setw(WIDTH - 4) << grade[i];
+    cout << "  " << setw(WIDTH - 4) << pass[i];
     cout << setw(WIDTH + 1) << " |";
     cout << "  " << endl;
     cout << "|=============================================================|\n";
